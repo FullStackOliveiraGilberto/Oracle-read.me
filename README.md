@@ -1,0 +1,16 @@
+# Oracle-read.me
+
+oracle JOB
+Overview of Creating Jobs
+You create one or more jobs using the DBMS_SCHEDULER.CREATE_JOB or DBMS_SCHEDULER.CREATE_JOBS procedures or Enterprise Manager. You use the CREATE_JOB procedure to create a single job. This procedure is overloaded to enable you to create different types of jobs that are based on different objects. You can create multiple jobs in a single transaction using the CREATE_JOBS procedure.
+
+You must have the CREATE JOB privilege to create a job in your own schema, and the CREATE ANY JOB privilege to create a job in any schema except SYS.
+
+For each job being created, you specify a job type, an action, and a schedule. You can also optionally specify a credential name, a destination or destination group name, a job class, and other attributes. As soon as you enable a job, it is automatically run by the Scheduler at its next scheduled date and time. By default, jobs are disabled when created and must be enabled with DBMS_SCHEDULER.ENABLE to run. You can also set the enabled argument of the CREATE_JOB procedure to TRUE, in which case the job is ready to be automatically run, according to its schedule, as soon as you create it.
+
+Some job attributes cannot be set with CREATE_JOB, and instead must be set with DBMS_SCHEDULER.SET_ATTRIBUTE. For example, to set the logging_level attribute for a job, you must call SET_ATTRIBUTE after calling CREATE_JOB.
+
+You can create a job in another schema by specifying schema.job_name. The creator of a job is, therefore, not necessarily the job owner. The job owner is the user in whose schema the job is created. The NLS environment of the job, when it runs, is the existing environment at the time the job was created.
+
+Example 29-1 demonstrates creating a database job called update_sales, which calls a package procedure in the OPS schema that updates a sales summary table:
+© 2018 GitHub, Inc.
